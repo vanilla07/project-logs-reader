@@ -1,6 +1,6 @@
 # Introduction
 
-An application to read logs from a sample.log file.
+An application to read logs from a `sample.log` file.
 
 * Backend : Java / Dropwizard / Hibernate
 
@@ -10,7 +10,7 @@ An application to read logs from a sample.log file.
 
 # Running The Application
 
-To run the application run the following commands in project-logs/dropwizard-logs.
+To run the application run the following commands in `project-logs/dropwizard-logs`.
 
 * To package the example run (Maven and Java 8 required).
 
@@ -30,7 +30,7 @@ To run the application run the following commands in project-logs/dropwizard-log
 
 # Intall The Angular Interface
 
-To test the application run the following commands in project-logs/angular-logs.
+To test the application run the following commands in `project-logs/angular-logs`.
 
 * To install project dependencies (Node npm required).
 
@@ -46,21 +46,21 @@ To test the application run the following commands in project-logs/angular-logs.
 
 # Test The Application
 
-While Java server running, open project-logs/angular-logs/dist/index.html in a browser.
+While Java server running, open `project-logs/angular-logs/dist/index.html` in a browser.
 
 # Test The Application without Maven/Bower/Grunt
 
-* Download and unzip compiled-files.zip
+* Download and unzip `compiled-files.zip`
 
 * In dropwizard-logs folder, run the command (Java 8 required) :
  		
 		java -jar target/dropwizard-logs-1.0.0-SNAPSHOT.jar server config.yml
 
-* In angular-logs/dist folder, open index.html in a web browser.
+* In `angular-logs/dist` folder, open `index.html` in a web browser.
 
 # Parse Sample file
 
-The sample.log file is located in project-logs/dropwizard-logs folder.
+The `sample.log` file is located in `project-logs/dropwizard-logs` folder.
 
 To parse the file and load the logs into the database.
 

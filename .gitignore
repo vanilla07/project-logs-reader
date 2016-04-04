@@ -1,0 +1,6 @@
+/angular-logs/node_modules
+/angular-logs/dist
+/angular-logs/.tmp
+/angular-logs/.sass-cache
+/angular-logs/bower_components
+/dropwizard-logs/target

@@ -1,0 +1,87 @@
+	<div class="row row-center">
+		<h1><span class="glyphicon glyphicon-list"></span> Logs Reader</h1>
+    	<p class="lead"><span class="glyphicon glyphicon-search"></span> Find a log by : </p>
+    	<form class="search-fields form-inline">
+    		<div class="form-group">
+    			<label class="sr-only">UUID</label>
+		    	<input type="text" class="form-control" ng-model="search.uuid" placeholder="UUID">
+		    </div>
+		    <div class="form-group">
+    			<label class="sr-only">IP address</label>
+	    		<input type="text" class="form-control" ng-model="search.ipAddress" placeholder="IP address">
+	    	</div>
+	    	<div class="form-group">
+    			<label class="sr-only">URL</label>
+	    		<input type="text" class="form-control" ng-model="search.url" placeholder="URL"> 
+	    	</div>
+	    	<div class="form-group">
+    			<label class="sr-only">Request Status</label>
+	    		<input type="text" class="form-control" ng-model="search.returnStatus" placeholder="Request Status">
+	    	</div>
+	    	<div class="form-group">
+    			<label class="sr-only">Details</label>
+	    		<input type="text" class="form-control" ng-model="search.details" placeholder="Details">
+	    	</div><br /><br />
+	    	<div class="checkbox">
+				<md-checkbox md-no-ink class="md-primary" ng-model="strict"> Strict Search &nbsp;|&nbsp;</md-checkbox>
+			</div>
+			<div class="checkbox">
+				<md-checkbox md-no-ink class="md-primary" ng-model="assets" ng-change="toggleAssets(assets)"> Show assets requests &nbsp;|&nbsp;</md-checkbox>
+			</div>
+			<div class="checkbox">
+				<md-checkbox md-no-ink class="md-primary" ng-model="status"> Show only status not 200 </md-checkbox>
+			</div>
+		</form>
+		
+    	
+    	<ul class="nav nav-tabs" >
+    		<li role="presentation" ng-class="{active:isSelected('all')}">
+            	<a ng-click="select('all')" role="tab">All Logs</a>
+            </li>
+            <li role="presentation" ng-class="{active:isSelected(r)}" ng-repeat="r in requestType">
+            	<a ng-click="select(r)" role="tab">{{r}} </a>
+            </li>
+        </ul>
+        <div class="tab-content">
+	        <div>
+	        	<h4>Number of requests : <span class="label label-default">{{filteredlogs.length}}</span></h4>
+	        	<div class="panel panel-default">
+				  <div class="panel-heading">
+				    <h3 class="panel-title"><span class="glyphicon glyphicon-info-sign"></span> Selected Request UUID : {{selectedLog.uuid}}</h3>
+				  </div>
+				  <div class="panel-body">
+				    <p ng-bind-html="selectedLog.details | unsafe"></p>
+				    <p ng-if="!selectedLog">Select a request to show details</p>
+				  </div>
+				</div>
+				<div layout="row" layout-sm="column" layout-align="space-around" ng-show="loading">
+					<md-progress-circular md-mode="{{loadMode}}" md-diameter="80"></md-progress-circular>
+				</div>
+	        	<table class="table table-striped table-bordered table-hover" ng-hide="loading">
+  					<thead>
+	  					<tr>
+	  						<th class="request-col">Request</th>
+					    	<th ng-click="sortBy('dateTime')" class="sorting-hover date-col"> <i class="fa fa-sort"></i> DateTime </th>
+					    	<th ng-click="sortBy('executionTime')" class="sorting-hover duration-col"> <i class="fa fa-sort"></i> Duration </th>
+					    	<th ng-click="sortBy('ipAddress')" class="sorting-hover ip-col"> <i class="fa fa-sort"></i> Client IP </th>
+					    	<th ng-click="sortBy('url')" class="sorting-hover url-col"> <i class="fa fa-sort"></i> URL </th>
+					    	<th ng-click="sortBy('returnStatus')" class="sorting-hover status-col"> <i class="fa fa-sort"></i> Status </th>
+					    	<th class="uuid-col"> UUID </th>
+					  	</tr>
+					</thead>
+				  	<tbody>
+					  	<tr ng-repeat="log in filteredlogs = (logs | filter:{ requestType: selectedType } | filter:{ returnStatus: getStatusFilter(status) } | filter:search:strict | orderBy:sort:reverseSort)"
+					  		ng-click="setSelectedLog(log)">
+					    	<td class="request-col"><span ng-class="log.requestType" class="badge">{{log.requestType}}</span></td>
+					    	<td class="date-col">{{log.dateTime | date:'yyyy-MM-dd HH:mm:ss Z'}}</td>
+					    	<td class="duration-col">{{log.executionTime}} ms</td>
+					    	<td class="ip-col">{{log.ipAddress}}</td>
+					    	<td class="url-col">{{log.url}}</td>
+					    	<td class="status-col">{{log.returnStatus}}</td>
+					    	<td class="uuid-col">{{log.uuid}}</td> 
+					  	</tr>
+					</tbody>
+				</table>
+	        </div>
+    	</div>
+    </div>

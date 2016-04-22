@@ -2,6 +2,8 @@
 
 An application to read logs from a `sample.log` file.
 
+You can see it here : http://jchevalier.pro/projects/logs-reader
+
 * Backend : Java / Dropwizard / Hibernate
 
 * Front : AngularJs / Bootstrap
